@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button id="btn">发送请求</button>
+    <form id="form">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit" value="提交">
+    </form>
+
+    <script src="./public/00.jquery.min.js"></script>
+
+
+    <!-- =======================基本使用===================== -->
+    <script>
+        // 客户参数
+        var params = {
+            name: 'abcd',
+            age: 20,
+            sex: '男',
+        };
+
+        // $ajax
+        $('#btn').on('click', function() {
+            $.ajax({
+                // 请求方式
+                type: 'get',
+                url: 'http://localhost:3000/base',
+
+                // 请求参数data,会自动转换为 name=abcd&age=20,对应x-www-form-urlencoded参数格式类型。
+                // 请求参数data,若格式类型为json，则需要对 data 对象转为json字符串：name=abcd&age=20。
+                data: JSON.stringify(params),
+                // 参数的格式类型
+                contentType: 'application/json',
+
+                // 在请求之前调用
+                beforeSend: function() {
+                    //可以做缓存的过程 
+                },
+
+                success: function(response) {
+                    console.log(response); // 不需要JSON转换
+                },
+                error: function(xhr) {
+                    console.log(xhr);
+                }
+            });
+        })
+    </script>
+
+
+
+    <!-- ========================表单数据======================= -->
+    <script>
+        $('#form').on('submit', function() {
+            // ex1.将表单中的数据自动拼接成字符串类型的参数
+            var params = $('#form').serialize();
+            // ex2.将表单中用户输入的内容转换为对象类型
+            serializeObject($(this));
+
+            return false;
+        });
+
+        // 封装函数
+        function serializeObject(obj) {
+            var result = {};
+
+            // serializeArray()返回数组：[{name:'username',value:'输入的值'},{name:'passw',value:'值'}]
+            var params = obj.serializeArray();
+
+            // 遍历该数组,将数组转换为对象类型
+            $.each(params, function(index, value) {
+                //result[username] = 输入的值,
+                result[value.name] = value.value;
+            })
+
+            return result;
+        }
+    </script>
+
+
+    <!-- =========================发送jsonp请求====================== -->
+    <script>
+        $('#btn').on('click', function() {
+            $.ajax({
+                url: '/jsonp',
+                // jsonp请求
+                dataType: 'jsonp',
+                // 改callback名字
+                jsonp: 'cb',
+                success: function(response) {
+                    //模板引擎
+                    console.log(response);
+                }
+            })
+        })
+    </script>
+
+
+</body>
+
+</html>

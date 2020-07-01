@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 1111.创建普通的html表单 -->
+    <form id="form">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="button" id="btn" value="提交">
+    </form>
+
+
+    <script type="text/javascript">
+        // 获取
+        var btn = document.getElementById('btn');
+        var form = document.getElementById('form');
+
+        // 为按钮添加点击事件：onclick。
+        btn.onclick = function() {
+
+            // 2222.将普通的html表单转换为表单对象
+            var formData = new FormData(form);
+
+            // 3.1 创建ajax对象
+            var xhr = new XMLHttpRequest();
+            // 3.2 对ajax对象进行配置 （必须为post）
+            xhr.open('post', 'http://localhost:3000/formData');
+            // 3.3 发送ajax请求
+            xhr.send(formData);
+            // 3.4 监听xhr对象下面的onload事件
+            xhr.onload = function() {
+                // 对象http状态码进行判断
+                if (xhr.status == 200) {
+                    console.log(xhr.responseText);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

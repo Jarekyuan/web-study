@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="uuuname">
+    <input type="checkbox" id="rname">记住用户名
+
+    <script>
+        var uuuname = document.querySelector('#uuuname');
+        var rname = document.querySelector('#rname');
+
+        if (localStorage.getItem('uuuname')) {
+            uuuname.value = localStorage.getItem('uuuname'); //如果有值，下次打开页面就会存储到文本框
+            rname.checked = true;
+        }
+        rname.addEventListener('change', function() {
+            if (this.checked) {
+                localStorage.setItem('uuuname', uuuname.value);
+            } else {
+                localStorage.removeItem('uuuname');
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="art-template.js"></script>
+</head>
+
+<body>
+    <div class="box"></div>
+
+    <!-- type="text/html" id='tpl'-->
+    <script type="text/html" id='tpl'>
+        <h1>{{name}} {{age}}</h1>
+    </script>
+
+    <script>
+        // template()方法拼接模板和数据
+        var html = template('tpl', {
+            name: 'qwe',
+            age: 20
+        });
+        // 添加到页面
+        document.querySelector('.box').innerHTML = html;
+    </script>
+</body>
+
+</html>

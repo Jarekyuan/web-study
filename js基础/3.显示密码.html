@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            border-bottom: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        
+        .box input {
+            width: 370px;
+            height: 30px;
+            border: 0;
+            outline: none;
+        }
+        
+        .box label {
+            position: absolute;
+            right: 30px;
+            top: 5px;
+        }
+        
+        span {
+            position: absolute;
+            right: 420px;
+            top: 105px;
+        }
+        
+        .wrong {
+            color: red;
+        }
+        
+        .right {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 点击了按钮，把密码框类型改变为文本框类型。 -->
+    <div class="box">
+        <label for=""><button id="eye">显示密码</button></label>
+        <input type="password" id="pwd">
+    </div>
+    <span class="message"> 请输入6-16位密码 </span>
+
+    <script>
+        // 获取元素
+        var eye = document.getElementById('eye');
+        var pwd = document.getElementById('pwd');
+
+        var spn = document.querySelector('span');
+        var ipt = document.querySelector('input');
+        // 注册事件 处理程序
+        var flag = 0;
+        eye.onclick = function() {
+                if (flag == 0) {
+                    pwd.type = 'text';
+                    eye.innerHTML = '隐藏';
+                    flag = 1;
+                } else {
+                    pwd.type = 'password';
+                    eye.innerHTML = '显示密码';
+                    flag = 0;
+                }
+            }
+            // 长度判断
+        ipt.onblur = function() {
+            if (this.value.length < 6 || this.value.length > 16) {
+                spn.className = 'message wrong';
+                spn.innerHTML = '请输入正确的长度';
+            } else {
+                spn.className = 'message right';
+                spn.innerHTML = '输入正确';
+            }
+        }
+    </script>
+</body>
+
+</html>

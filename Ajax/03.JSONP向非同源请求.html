@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点击我向服务器2发送请求1</button>
+    <button id="btn2">点击我向服务器2发送请求2</button>
+
+
+    <!-- 22222 -->
+    <script>
+        function fn111(data) {
+            console.log(data);
+
+        }
+    </script>
+
+    <!-- 11111 -->
+    <!-- <script src="http://localhost:3001/test"></script> -->
+
+
+    <!-- 11111 动态创建 -->
+    <script>
+        var btn = document.getElementById('btn');
+
+        btn.onclick = function() {
+            var script = document.createElement('script');
+            // ***核心：利用script.src属性可以向非同源服务器发送请求
+            script.src = 'http://localhost:3001/test?callback=fn111';
+            document.body.appendChild(script);
+
+            //加载完后删除script标签
+            script.onload = function() {
+                document.body.removeChild(script);
+            }
+        }
+    </script>
+
+
+
+
+
+    <!-- 333333 封装------------------------------------------ -->
+    <script>
+        var btn = document.getElementById('btn');
+        var btn2 = document.getElementById('btn2');
+
+
+        btn.onclick = function() {
+            // 在点击事件后调用
+            jsonp({
+                url: 'http://localhost:3001/test',
+                data: {
+                    name: qwe,
+                    age: 20
+                },
+                // 问题：非全局函数/匿名函数
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        }
+
+        btn2.onclick = function() {
+            // 在点击事件后调用
+            jsonp({
+                url: 'http://localhost:3002/test2',
+                data: {
+                    name: rrre,
+                    age: 25
+                },
+                // 问题：非全局函数/匿名函数
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        }
+
+
+        // 封装
+        function jsonp(options) {
+            var script = document.createElement('script');
+
+            // get 请求参数拼接
+            var params = '';
+            for (var attr in options.data) {
+                params += '&' + attr + '=' + options.data[attr];
+            }
+
+            // 设置全局函数和名字
+            var fnName = 'fn' + Math.random().toString().replace('.', '');
+            window[fnName] = options.success;
+            script.src = options.url + '?callback=' + fnName + params;
+
+            document.body.appendChild(script);
+            //加载完后删除script标签
+            script.onload = function() {
+                document.body.removeChild(script);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

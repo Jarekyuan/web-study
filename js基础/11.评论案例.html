@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            width: 200px;
+            height: 30px;
+            margin-bottom: 10px;
+            background-color: #ccc;
+        }
+        
+        li a {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea name="" id="" cols="30" rows="10">122344</textarea>
+    <button>发布评论</button>
+    <ul>
+    </ul>
+
+    <!-- 点击按钮，就动态创建一个li，添加到ul里面。 
+        把文本域里面的值 给li（修改元素内容)。  并且同时多添加一个删除链接-->
+    <script>
+        var btn = document.querySelector('button');
+        var text = document.querySelector('textarea');
+
+        btn.onclick = function() {
+            if (text.value == '') {
+                alert('你没有输入内容');
+                return 0;
+            } else {
+                // 创建元素
+                var li = document.createElement('li');
+                // 添加元素
+                var ul = document.querySelector('ul');
+                li.innerHTML = text.value + '<a href="javascript:;">删除</a>';
+                ul.insertBefore(li, ul.children[0]);
+                // 删除元素
+                var as = document.querySelectorAll('a');
+                for (var i = 0; i < as.length; i++) {
+                    as[i].onclick = function() {
+                        // 删除的是 父亲（ul）里面的孩子（li）。  
+                        // 当前a中的li为this.parentNode
+                        ul.removeChild(this.parentNode);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 300px;
+            margin: 100px auto;
+        }
+        
+        thead th {
+            width: 100px;
+            height: 30px;
+            border: 1px solid #ccc;
+            background-color: #ccc;
+        }
+        
+        tbody td {
+            width: 80px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // 1.先准备数据
+        var datas = [{
+            name: '时刻记',
+            subject: 'css',
+            score: 99
+        }, {
+            name: '安全网',
+            subject: 'css',
+            score: 76
+        }, {
+            name: '切求他去',
+            subject: 'css',
+            score: 79
+        }, {
+            name: '去125',
+            subject: 'css',
+            score: 66
+        }];
+        // 2.往tbody里面创建行，几个人几行。行数为datas.length。
+        var tbody = document.querySelector('tbody');
+        for (var i = 0; i < datas.length; i++) { // 外面的for管行
+            // 2.1创建行
+            var tr = document.createElement('tr');
+            tbody.appendChild(tr);
+            // 2.2行里面创建单元格。单元格数为属性个数。
+            for (var k in datas[i]) { //里面的for管列
+                var td = document.createElement('td');
+                td.innerHTML = datas[i][k]; //datas[i][k]为属性值，k为属性名。
+                tr.appendChild(td);
+            }
+            // 2.3创建有删除2个字的单元格.
+            var td = document.createElement('td');
+            td.innerHTML = '<a href="javascript:;">删除</a>';
+            tr.appendChild(td);
+        }
+        // 3.删除行
+        var as = document.querySelectorAll('a');
+        for (var i = 0; i < as.length; i++) {
+            as[i].onclick = function() {
+                tbody.removeChild(this.parentNode.parentNode);
+            }
+        }
+    </script>
+</body>
+
+</html>

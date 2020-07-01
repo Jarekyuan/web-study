@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .bg {
+            background-color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 鼠标经过tr行，当前行变颜色，离开后去掉颜色。 -->
+    <table>
+        <tr>566
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+        </tr>
+        <tr>qqqq
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+        </tr>
+        <tr>566
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+        </tr>
+        <tr>566
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+            <th>
+                123
+            </th>
+        </tr>
+
+    </table>
+    <script>
+        var trs = document.querySelectorAll('tr');
+        for (var i = 0; i < trs.length; i++) {
+            // 鼠标经过的事件
+            trs[i].onmouseover = function() {
+                    this.className = 'bg';
+                }
+                // 鼠标离开的事件
+            trs[i].onmouseout = function() {
+                this.className = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

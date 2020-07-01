@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav {
+            margin: 200px 200px;
+        }
+        
+        ul li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .li-head {
+            float: left;
+            margin: 10px 20px;
+            position: relative;
+        }
+        
+        li {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #ccc;
+        }
+        
+        .li-head ul {
+            position: absolute;
+            left: -41px;
+            top: 40px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="nav">
+        <li class="li-head">
+            <a href="#">微博</a>
+            <ul>
+                <li><a href="#">评论</a></li>
+                <li><a href="#">@我</a></li>
+                <li><a href="#">评论</a></li>
+            </ul>
+        </li>
+        <li class="li-head">
+            <a href="#">微博</a>
+            <ul>
+                <li><a href="#">评论</a></li>
+                <li><a href="#">@我</a></li>
+                <li><a href="#">评论</a></li>
+            </ul>
+        </li>
+        <li class="li-head">
+            <a href="#">微博</a>
+            <ul>
+                <li><a href="#">评论</a></li>
+                <li><a href="#">@我</a></li>
+                <li><a href="#">评论</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <!-- 鼠标经过上面的li，需要循环注册鼠标经过事件。
+    当鼠标经过一个li，li里面的ul显示，鼠标离开，ul隐藏。 -->
+
+    <script>
+        var nav = document.querySelector('.nav');
+        var lis = nav.children;
+
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].onmouseover = function() {
+                this.children[1].style.display = 'block';
+            }
+            lis[i].onmouseout = function() {
+                this.children[1].style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

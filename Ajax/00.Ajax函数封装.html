@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ajax(options) {
+
+            // 定义默认参数
+            var defaults = {
+                type: 'get',
+                url: '',
+                data: {},
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                success: function() {},
+                error: function() {}
+            };
+            // 对象覆盖
+            Object.assign(defaults, options);
+
+
+
+            // 11111111
+            var xhr = new XMLHttpRequest();
+
+            //拼接参数
+            var params = '';
+            for (var attr in defaults.data) {
+                params += attr + '=' + defaults.data[attr] + '&';
+            };
+            params = params.substr(0, params.length - 1); //将参数最后的&截取
+
+            //判断-get
+            if (defaults.type == 'get') {
+                defaults.url = defaults.url + '?' + params;
+            }
+            xhr.open(defaults.type, defaults.url);
+
+            //判断-post
+            if (defaults.type == 'post') {
+                //设置格式
+                var contentType = defaults.header['Content-Type'];
+                xhr.setRequestHeader('Content-Type', contentType);
+                if (contentType == 'application/x-www-form-urlencoded') {
+                    xhr.send(params);
+                } else {
+                    xhr.send(JSON.stringify(defaults.data));
+                }
+            } else {
+                xhr.send(); //get
+            }
+
+            // 44444444
+            xhr.onload = function() {
+                //获取响应头的格式类型
+                var contentType = xhr.getResponseHeader('Content-Type');
+                //服务器端返回的数据
+                var responseText = xhr.responseText;
+                // 如果为JSON对象（一般）
+                if (contentType.includes('application/json')) {
+                    responseText = JSON.parse(responseText); //把JSON字符串 转 对象                 
+                }
+                // 否则为 xhr.responseText
+                if (xhr.status == 200) {
+                    defaults.success(responseText, xhr);
+                } else {
+                    defaults.error(responseText, xhr);
+                }
+            }
+        };
+
+
+
+        ajax({
+            url: 'http://localhost:3000/first',
+            data: {
+                name: qwe,
+                age: 20,
+            },
+            success: function(data) {
+                console.log(data);
+            },
+        })
+    </script>
+</body>
+
+</html>

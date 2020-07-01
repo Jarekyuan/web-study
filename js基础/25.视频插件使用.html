@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../其他/新建文件夹/video-js.min.css">
+    <script src="../其他/新建文件夹/video.min.js"></script>
+
+    <style>
+        body {
+            background-color: #191919
+        }
+        
+        .m {
+            width: 960px;
+            height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="m">
+        <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="720" height="400" poster="m.jpg" data-setup="{}">
+          <source src="../其他/视频插件/premiere01_跑个流程 导入素材 导出媒体.mp4" type="video/mp4">
+          <!-- <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm"> -->
+          <!-- <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg"> -->
+          <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>
+        </video>
+    </div>
+
+    <script src="js/video.min.js"></script>
+    <script src="http://vjs.zencdn.net/5.19/lang/zh-CN.js"></script>
+    <script type="text/javascript">
+        var myPlayer = videojs('my-video');
+        videojs("my-video").ready(function() {
+            var myPlayer = this;
+            myPlayer.play();
+        });
+    </script>
+
+</body>
+
+</html>

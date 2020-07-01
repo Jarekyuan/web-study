@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        var div = document.querySelector('div');
+        var times = 5;
+        tiaozhuan();
+
+        setInterval(tiaozhuan, 1000);
+
+        function tiaozhuan() {
+            if (times == 0) {
+                location.href = 'www.baidu.com';
+            } else {
+                div.innerHTML = '' + times + '秒后跳转到首页';
+                times--;
+            }
+        }
+    </script>
+</body>
+
+</html>

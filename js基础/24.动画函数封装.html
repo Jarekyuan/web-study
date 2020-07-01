@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box01 {
+            position: absolute;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        
+        .box02 {
+            position: absolute;
+            left: 0;
+            top: 200px;
+            width: 150px;
+            height: 150px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn01">box2移动500</button>
+    <button class="btn02">box2移动800</button>
+
+    <div class="box01"></div>
+    <div class="box02"></div>
+
+    <script>
+        // 封装函数动画
+        function animate(obj, target, callback) {
+            clearInterval(obj.times); //保证当前只有一个定时器在执行
+            obj.times = setInterval(function() {
+                var step = (target - obj.offsetLeft) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step); // 正负取整
+                if (obj.offsetLeft == target) {
+                    clearInterval(obj.times);
+                    // 回调函数写到定时器结束后
+                    if (callback) {
+                        callback();
+                    }
+                }
+                // 缓动动画效果
+                obj.style.left = obj.offsetLeft + step + 'px';
+            }, 15);
+        }
+
+
+        // 调用动画
+        var box01 = document.querySelector('.box01');
+        var box02 = document.querySelector('.box02');
+        var btn01 = document.querySelector('.btn01');
+        var btn02 = document.querySelector('.btn02');
+
+        animate(box01, 400);
+        btn01.addEventListener('click', function() {
+            animate(box02, 500);
+        })
+        btn02.addEventListener('click', function() {
+            animate(box02, 800, function() {
+                box02.innerHTML = '回调函数';
+            });
+        })
+    </script>
+</body>
+
+</html>
