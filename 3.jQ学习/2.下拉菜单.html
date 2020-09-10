@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="00.jQuery.min.js"></script>
+    <style>
+        .nav {
+            margin: 200px 200px;
+        }
+        
+        ul li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .li-head {
+            float: left;
+            margin: 10px 20px;
+            position: relative;
+        }
+        
+        li {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #ccc;
+        }
+        
+        .li-head ul {
+            position: absolute;
+            left: -41px;
+            top: 40px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="nav">
+        <li class="li-head">
+            <a href="#">微博</a>
+            <ul>
+                <li><a href="#">评论</a></li>
+                <li><a href="#">@我</a></li>
+                <li><a href="#">评论</a></li>
+            </ul>
+        </li>
+        <li class="li-head">
+            <a href="#">微博</a>
+            <ul>
+                <li><a href="#">评论</a></li>
+                <li><a href="#">@我</a></li>
+                <li><a href="#">评论</a></li>
+            </ul>
+        </li>
+        <li class="li-head">
+            <a href="#">微博</a>
+            <ul>
+                <li><a href="#">评论</a></li>
+                <li><a href="#">@我</a></li>
+                <li><a href="#">评论</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        $(function() {
+            // $(".nav>li").mouseover(function() {
+            //     $(this).children("ul").show();
+            // });
+            // $(".nav>li").mouseout(function() {
+            //     $(this).children("ul").hide();
+            // });
+
+
+            //简洁版 hover
+            // $(".nav>li").hover(function() {
+            //     $(this).children("ul").show();
+            // }, function() {
+            //     $(this).children("ul").hide();
+            // });
+
+            //更简洁版 hover, toggle
+            var flag = 1; //节流阀
+
+            if (flag = 1) {
+                flag = 0;
+                $(".nav>li").hover(function() {
+                    $(this).children("ul").stop().slideToggle(2000, function() {
+                        flag = 1; //动画结束打开节流阀
+                    });
+                });
+            }
+        })
+    </script>
+</body>
+
+</html>

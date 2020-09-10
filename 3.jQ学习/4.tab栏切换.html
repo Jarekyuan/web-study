@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="00.jQuery.min.js"></script>
+    <style>
+        .tab {
+            width: 400px;
+            margin: 200px auto;
+            background-color: #ccc;
+        }
+        
+        .tab-list li {
+            width: 80px;
+            height: 30px;
+            list-style: none;
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        
+        .current {
+            background-color: red;
+            color: white;
+        }
+        
+        .item {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tab-list">
+            <ul>
+                <li>商品介绍</li>
+                <li>245</li>
+                <li>678</li>
+                <li>999</li>
+            </ul>
+        </div>
+
+        <div class="tab-con">
+            <div class="item" style="display: block;">
+                shang pimngasdk
+            </div>
+            <div class="item">
+                124773945
+            </div>
+            <div class="item">
+                aq234566
+            </div>
+            <div class="item">
+                qqqqqqqq
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+            $(".tab-list li").mouseover(function() {
+                var index = $(this).index();
+                $(this).addClass("current").siblings().removeClass("current");
+                $(".item").eq(index).show().eq(index).siblings().hide();
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="00.jQuery.min.js"></script>
+
+    <style>
+        .w {
+            width: 980px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            height: 200px;
+            background-color: yellowgreen;
+            margin-bottom: 20px;
+        }
+        
+        .banner {
+            height: 500px;
+            background-color: pink;
+            margin-bottom: 20px;
+        }
+        
+        .main {
+            height: 800px;
+            background-color: skyblue;
+            margin-bottom: 20px;
+        }
+        
+        .next {
+            height: 1000px;
+            background-color: orange;
+        }
+        
+        .slider-bar {
+            width: 100px;
+            height: 300px;
+            position: fixed;
+            right: 0;
+            top: 200px;
+            background-color: rgb(255, 102, 0);
+            display: none;
+        }
+        
+        .slider-bar div {
+            width: 100px;
+            height: 60px;
+            border: 1px solid #333;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        .current {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-bar">
+        <div class="goBack current">返回顶部</div>
+        <div class="goBanner">返回banner</div>
+        <div class="goMain">返回main</div>
+        <div class="goNext">返回next</div>
+    </div>
+    <div class="innerbox">
+        <div class="header w">头部区域</div>
+        <div class="banner w">banner区域</div>
+        <div class="main w">主体部分</div>
+        <div class="next w">其他部分</div>
+    </div>
+    <script>
+        $(function() {
+
+            var flag = 1;
+            //1111111
+            var bannerX = $(".banner").offset().top;
+            tool();
+
+            function tool() {
+                if ($(document).scrollTop() >= bannerX) {
+                    $(".slider-bar").show();
+                } else {
+                    $(".slider-bar").hide();
+
+                }
+            }
+            $(window).scroll(function() {
+                tool();
+                // 333333 用each遍历四个区域。
+                if (flag == 1) {
+                    $(".innerbox .w").each(function(i, ele) {
+                        if ($(document).scrollTop() >= $(ele).offset().top) {
+                            $(".slider-bar div").eq(i).addClass("current").siblings().removeClass("current");
+                        }
+                    })
+                }
+
+            });
+
+            //2222222
+            $(".slider-bar div").click(function() {
+                flag = 0;
+                var index = $(this).index();
+                $(this).index();
+                // 选出对应索引号的内容的区域的top值
+                var current = $(".innerbox div").eq(index).offset().top;
+                //页面滚动
+                $("body, html").stop().animate({
+                    scrollTop: current
+                }, function() {
+                    flag = 1;
+                });
+                $(this).addClass("current").siblings().removeClass("current");
+            });
+
+
+        })
+    </script>
+</body>
+
+</html>

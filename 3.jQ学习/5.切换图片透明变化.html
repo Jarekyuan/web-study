@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="00.jQuery.min.js"></script>
+
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+        }
+        
+        ul {
+            width: 120%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            /* display: flex; */
+        }
+        
+        ul li {
+            width: 100px;
+            height: 100px;
+            float: left;
+            background-color: #555;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <script>
+        $(function() {
+            $(".box li").hover(function() {
+                $(this).siblings().stop().fadeTo(400, 0.5);
+                $(this).css("backgroundColor", "#111");
+            }, function() {
+                $(this).siblings().stop().fadeTo(400, 1);
+                $(this).css("backgroundColor", "#555");
+
+            })
+        })
+    </script>
+</body>
+
+</html>
