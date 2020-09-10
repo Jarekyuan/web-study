@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div class="search">
+        按照价格查询： <input type="text" class="start"> - <input type="text" class="end">
+        <button class="search-for">搜索</button> 按照商品名称查询: <input type="text" class="product">
+        <button class="inquiry">查询</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>产品名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        var data = [{
+            id: 1,
+            pname: '小米',
+            price: 3999
+        }, {
+            id: 2,
+            pname: 'oppo',
+            price: 1999
+        }, {
+            id: 3,
+            pname: 'iphone',
+            price: 4999
+        }, {
+            id: 4,
+            pname: '华为',
+            price: 2999
+        }, ]
+
+        var tbody = document.querySelector('tbody');
+        var search_for = document.querySelector('.search-for');
+        var start = document.querySelector('.start');
+        var end = document.querySelector('.end');
+        var product = document.querySelector('.product');
+        var inquiry = document.querySelector('.inquiry');
+
+
+        // 渲染数据到页面
+        setDate(data);
+
+        function setDate(mydata) {
+            // 先清空，再渲染
+            tbody.innerHTML = '';
+            mydata.forEach(function(value) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + value.id + '</td><td>' + value.pname + '</td><td>' + value.price + '</td>';
+                tbody.appendChild(tr);
+            })
+        }
+        // 查询价格区域商品
+        search_for.addEventListener('click', function() {
+            var newData = data.filter(function(value) {
+                return value.price >= start.value && value.price <= end.value;
+            });
+            setDate(newData);
+        });
+        // 按名称查询商品
+        inquiry.addEventListener('click', function() {
+            var arr = [];
+            data.some(function(value) {
+                if (value.pname === product.value) {
+                    arr.push(value);
+                    return true;
+                }
+            });
+            setDate(arr);
+        })
+    </script>
+</body>
+
+</html>
