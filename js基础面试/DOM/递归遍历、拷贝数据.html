@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var data = [{
+            id: 1,
+            pname: '速度快',
+            goods: [{
+                id: 11,
+                mname: 'ASD',
+                goods: [{
+                    id: 111,
+                    wname: '速度啊速'
+                }]
+            }, {
+                id: 22,
+                mname: 'asdf',
+            }]
+        }, {
+            id: 2,
+            pname: '兑换积分',
+        }];
+
+        // 遍历数据
+        function getId(json, id) {
+            var o = {};
+            json.forEach(function(item) {
+                if (item.id == id) {
+                    o = item;
+                    // return item;
+                } else if (item.goods && item.goods.length > 0) {
+                    o = getId(item.goods, id);
+                }
+            });
+            return o;
+        }
+        console.log(getId(data, 1));
+        console.log(getId(data, 11));
+        console.log(getId(data, 111));
+
+
+        var obj = {
+            id: 1,
+            pname: '简单数据',
+            goods: {
+                id: 11,
+                mname: '复杂对象'
+            },
+            color: ['red', 'blue']
+        }
+
+        // 拷贝数据
+        var oo = {};
+
+        function deepCopy(newobj, oldobj) {
+            for (var k in oldobj) {
+                var items = oldobj[k];
+                // 判断属性值属于哪种数据类型 数组？对象？/简单类型？           
+                if (items instanceof Array) {
+                    newobj[k] = [];
+                    deepCopy(newobj[k], items);
+                } else if (items instanceof Object) {
+                    newobj[k] = {};
+                    deepCopy(newobj[k], items);
+                } else {
+                    newobj[k] = items;
+                }
+            }
+        }
+        deepCopy(oo, obj);
+        console.log(oo);
+    </script>
+
+
+</body>
+
+</html>

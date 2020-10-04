@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 手机电话号码验证
+        var regtel = /^1[3|4|5|7|8]\d{9}$/;
+        var tel = document.querySelector('tel');
+        regexp(tel, regtel);
+
+        function regexp(element, reg) {
+            element.onblur = function() {
+                if (reg.test(this.value)) {
+                    this.nextElementSibling.className = '正确的类名';
+                    this.nextElementSibling.innerHTML = '<i class="r-icon"></i>恭喜您输入正确';
+                } else {
+                    this.nextElementSibling.className = '错误的类名';
+                    this.nextElementSibling.innerHTML = '<i class="f-icon"></i>您输入错误';
+                }
+            }
+        }
+
+        // qq号验证
+        var regqq = /^[1-9]\d{4,}$/;
+        var qq = document.querySelector('qq');
+        regexp(qq, regqq);
+
+        //昵称验证
+        var regname = /^[\u4e00-\u9fa5]{0,}$/;
+        var mname = document.querySelector('mname');
+        regexp(mname, regname);
+
+        //短信验证
+        /^\d{6}$/;
+
+        //身份证号验证
+        /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+
+        // 帐号是否合法：/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/
+        // 密码：/^[a-zA-Z]\w{5,17}$/
+        //确认密码
+        surepwd.onblur = function() {
+                if (this.value == pwd.value) {
+                    this.nextElementSibling.className = '正确的类名';
+                    this.nextElementSibling.innerHTML = '<i class="r-icon"></i>恭喜您输入正确';
+                } else {
+                    this.nextElementSibling.className = '错误的类名';
+                    this.nextElementSibling.innerHTML = '<i class="f-icon"></i>您输入错误';
+                }
+            }
+            // 强密码：/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,10}$/
+            // 强密码：/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$/
+
+        // Email地址：/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+    </script>
+</body>
+
+</html>

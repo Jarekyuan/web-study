@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab {
+            width: 400px;
+            margin: 200px auto;
+            background-color: #ccc;
+        }
+        
+        .tab-list li {
+            width: 80px;
+            height: 30px;
+            list-style: none;
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        
+        .current {
+            background-color: red;
+            color: white;
+        }
+        
+        .item {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tab-list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>245</li>
+                <li>678</li>
+                <li>999</li>
+            </ul>
+        </div>
+
+        <div class="tab-con">
+            <div class="item" style="display: block;">
+                shang pimngasdk
+            </div>
+            <div class="item">
+                124773945
+            </div>
+            <div class="item">
+                aq234566
+            </div>
+            <div class="item">
+                qqqqqqqq
+            </div>
+        </div>
+    </div>
+
+
+    <!-- tab案例 -->
+    <!-- 1.上面模块，点击一个底色变红，其他不变。（排他）
+         2.下面模块，会随着上面的选项卡变化内容，
+           给上面的小li添加一个自定义属性，然后对应到下面的每一个内容。 -->
+    <script>
+        var tab_list = document.querySelector('.tab-list');
+        var lis = tab_list.querySelectorAll('li');
+        var items = document.querySelectorAll('.item');
+
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].setAttribute('date-index', i);
+            lis[i].onclick = function() {
+                // 上面
+                for (var i = 0; i < lis.length; i++) {
+                    lis[i].className = '';
+                }
+                this.className = 'current';
+                // 下面
+                for (var i = 0; i < items.length; i++) {
+                    items[i].style.display = 'none';
+                }
+                items[this.getAttribute('date-index')].style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

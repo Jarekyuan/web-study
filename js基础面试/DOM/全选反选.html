@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1.全选和取消全选，点击全选时候，下面复选框全部跟随全选按钮变化。
+         2.当底下全选时候全选框自动打勾，当底下有一个取消选择时候全选框取消-->
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" id="j_01">
+                </th>
+                <th>全选</th>
+            </tr> <br>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    <input type="checkbox">
+                </th>
+                <th>th12345</th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox">
+                </th>
+                <th>th12345</th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox">
+                </th>
+                <th>th12345</th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox">
+                </th>
+                <th>th12345</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var j_01 = document.getElementById('j_01');
+        var inputs = document.querySelector('tbody').querySelectorAll('input');
+        // 1.全选和反选
+        j_01.onclick = function() {
+            // this.checked可以得到选中值为 true
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].checked = this.checked;
+            }
+        }
+
+        // 2.下面按钮影响全选框
+        for (var i = 0; i < inputs.length; i++) {
+            // 点击一下底下的框，每次就检查一下 是否(if)全选
+            inputs[i].onclick = function() {
+                var flag = 1;
+                for (var i = 0; i < inputs.length; i++) {
+                    if (!inputs[i].checked) { //凡是有一个i 不选中，则全选为0
+                        flag = 0;
+                        break;
+                    }
+                }
+                j_01.checked = flag;
+            }
+        }
+    </script>
+</body>
+
+</html>
